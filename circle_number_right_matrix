@@ -1,5 +1,5 @@
 #!/bin/bash
-# circle_number_right
+# circle_number_right_matrix
  
 num=${1:-10}
 cur_number=0
