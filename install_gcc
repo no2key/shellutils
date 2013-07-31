@@ -1,0 +1,56 @@
+#!/bin/bash
+# install_gcc
+
+base_dir=/usr/local
+version=${1:-gcc-4.8.1}
+tarball=${version}.tar.bz2
+build_dir=${base_dir}/build
+source_dir=${PWD}/${version}
+gnu_ftp=http://ftp.gnu.org/gnu/gcc
+install_dir=${base_dir}/${version//-/.}
+
+yum -y install glibc-devel.i686
+
+mkdir -p ${build_dir} ${install_dir}
+
+wget ${gnu_ftp}/${version}/${tarball}
+tar -xf ${tarball}
+cd ${version}
+
+${source_dir}/contrib/download_prerequisites
+
+# ftp://ftp.gmplib.org/pub/gmp-5.1.2/gmp-5.1.2.tar.bz2
+# http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.bz2
+# http://www.multiprecision.org/mpc/download/mpc-1.0.1.tar.gz
+
+cd ${build_dir}
+
+${source_dir}/configure \
+--prefix=${install_dir} \
+--enable-bootstrap \
+--enable-shared \
+--enable-threads=posix \
+--enable-checking=release \
+--with-system-zlib \
+--enable-__cxa_atexit \
+--disable-libunwind-exceptions \
+--enable-gnu-unique-object \
+--enable-languages=c,c++,objc,obj-c++,fortran,go \
+--disable-dssi \
+--enable-libgcj-multifile \
+--disable-libjava-multilib \
+--with-ppl \
+--with-cloog \
+--with-tune=generic \
+--with-arch_32=i686 \
+--build=x86_64-redhat-linux
+
+make && make install
+rm -rf ${build_dir}
+yum -y remove $(rpm -qa | grep ^gcc-)
+
+cat << \EOF >> ${HOME}/.bashrc
+gcc_base=/usr/local/gcc.4.8.1
+export PATH=${PATH}:${gcc_base}/bin
+export LD_LIBRARY_PATH=${gcc_base}/lib:/usr/lib:${gcc_base}/lib64:/usr/lib64
+EOF
