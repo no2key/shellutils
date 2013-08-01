@@ -11,6 +11,12 @@ export GOPATH=/usr/local/go_library
 export PATH=${GOBIN}:${GOPATH}:${GOROOT}/pkg/tool/linux_amd64:${PATH}
 EOF
 
+cat << \EOF >> ${HOME}/.bashrc
+if ! pidof godoc &> /dev/null; then
+     godoc -http=:80 &
+fi
+EOF
+
 source /etc/profile
 mkdir -p ${GOPATH} ${GOROOT}
 hg clone -u release https://go.googlecode.com/hg/ ${GOROOT}
