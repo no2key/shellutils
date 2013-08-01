@@ -13,7 +13,7 @@ EOF
 
 cat << \EOF >> ${HOME}/.bashrc
 if ! pidof godoc &> /dev/null; then
-     godoc -http=:80 &
+     godoc -play=true -http=:80 &
 fi
 EOF
 
