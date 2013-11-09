@@ -11,7 +11,7 @@ download_link=http://sourceforge.net/projects/boost/files/boost
 
 mkdir -p ${build_dir} ${install_dir}
 cd ${build_dir}
-wget ${download_link}/${ver_number//_/.}/${tarball_name}
+wget ${download_link}/${ver_number//_/.}/${tarball_name} -o /dev/null
 tar -xf ${tarball_name}
 
 cd ${boost_ver}
