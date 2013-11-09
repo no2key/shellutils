@@ -13,7 +13,7 @@ yum -y install glibc-devel.i686
 
 mkdir -p ${build_dir} ${install_dir}
 
-wget ${gnu_ftp}/${version}/${tarball}
+wget ${gnu_ftp}/${version}/${tarball} -o /dev/null
 tar -xf ${tarball}
 cd ${version}
 
