@@ -3,18 +3,18 @@
  
 awk '
     {
-       if(max_nf<NF)
-          max_nf=NF
+       if (max_nf<NF)
+           max_nf=NF
        max_nr=NR
-       for(x=1; x<=NF; ++x)
-           matrix[x, NR]=$x
+       for (x=1; x<=NF; ++x)
+            matrix[x, NR]=$x
     }
 
 END {
-       for(x=1; x<=max_nf; ++x)
+       for (x=1; x<=max_nf; ++x)
        {
-           for (y=max_nr; y>=1; --y)
-                printf("%s ", matrix[x, y])
-           printf("\n")
+            for (y=max_nr; y>=1; --y)
+                 printf("%s ", matrix[x, y])
+            printf("\n")
        }
     }' "${1:--}"
