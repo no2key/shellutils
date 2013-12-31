@@ -5,8 +5,8 @@ list.data()
 {
    for i in ${@}/*
    {
-      [[ -e "${i}" ]] && echo "${i}"
-      [[ -d "${i}" ]] && list.data "${i}"
+       [[ -e "${i}" ]] && echo "${i}"
+       [[ -d "${i}" ]] && list.data "${i}"
    }
 }
  
