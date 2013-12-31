@@ -9,9 +9,9 @@ file=(${@})
 
 loop()
 {
-   for((i=0; i<len+1; ++i)); do
-        ((fd=i+10))
-          ${1}
+   for ((i=0; i<len+1; ++i)); do
+         ((fd=i+10))
+           ${1}
    done
 }
 
