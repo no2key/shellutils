@@ -14,8 +14,8 @@ background_id=${background[@]//1;/}
 echo -en "\n            ${background_id// /    }   ${background_bg// /  }   0m    ${coord// /   }\n"
 
 for fg_color in 3{0..7} 1\;3{0..7}; do
-    for((i=0; i<5-${#fg_color}; ++i)); do
-         echo -n " "
+    for ((i=0; i<5-${#fg_color}; ++i)); do
+          echo -n " "
     done
     echo -en "${fg_color}${esc}[${fg_color}m ${word} "
     i=0
@@ -34,8 +34,8 @@ for m in {0..255}; do
     echo -ne "\e[38;5;${m};1m[]\e[0m"
     if (( (m+1)%32 == 0 )); then
           echo -n "   |   "
-          for((n=m-31; n<=m; ++n)); do
-               echo -ne "\e[48;5;${n};1m[]\e[0m"
+          for ((n=m-31; n<=m; ++n)); do
+                echo -ne "\e[48;5;${n};1m[]\e[0m"
           done
           echo
    fi
